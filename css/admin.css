@@ -1,0 +1,9 @@
+/* admin.css – extra styles for admin panel */
+
+.btn-danger-sm {
+  padding: 0.25rem 0.5rem;
+  background: #fee2e2; color: #dc2626;
+  border: none; border-radius: 5px; font-size: 0.72rem;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-danger-sm:hover { background: #fca5a5; }

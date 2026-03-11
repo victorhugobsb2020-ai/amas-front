@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Empresário – AMAS</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="dashboard-page">
+
+<div class="dashboard-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="nav-logo"><div class="logo-icon"><i class="fas fa-city"></i></div><span>AMAS</span></div>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar emp"><i class="fas fa-store"></i></div>
+      <div><strong id="sidebarName">Empresário</strong><span class="badge-role emp-role">Empresário</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="sn-item active" onclick="showSection('consulta',this)"><i class="fas fa-search"></i> Consultar CPF</a>
+      <a href="#" class="sn-item" onclick="showSection('historico',this)"><i class="fas fa-history"></i> Histórico de consultas</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-theme sn-item" id="themeToggle"><i class="fas fa-moon" id="themeIcon"></i> Tema</button>
+      <a href="login.html" class="sn-item logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <header class="dash-header">
+      <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      <h2 id="pageTitle">Consultar CPF</h2>
+      <div class="dash-header-right">
+        <span id="dateTime" class="datetime"></span>
+        <a href="index.html" class="btn-outline-sm"><i class="fas fa-globe"></i> Site</a>
+      </div>
+    </header>
+
+    <!-- CONSULTA -->
+    <section class="dash-section active" id="sec-consulta">
+      <div class="consulta-container">
+        <div class="consulta-card">
+          <div class="consulta-icon"><i class="fas fa-search"></i></div>
+          <h3>Consulta de Associado</h3>
+          <p>Digite o CPF do cliente para verificar se está regular na AMAS e apto a receber benefícios.</p>
+          <div class="consulta-form">
+            <input type="text" id="cpfConsulta" placeholder="000.000.000-00" maxlength="14" class="consulta-input"/>
+            <button class="btn-primary btn-full" onclick="consultarCPF()"><i class="fas fa-search"></i> Consultar</button>
+          </div>
+          <div id="resultadoConsulta" class="resultado hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTÓRICO -->
+    <section class="dash-section" id="sec-historico">
+      <h3>Histórico de Consultas</h3>
+      <div class="table-wrapper">
+        <table class="dash-table">
+          <thead><tr><th>Data e Hora</th><th>CPF consultado</th><th>Nome</th><th>Status</th><th>Benefício</th></tr></thead>
+          <tbody id="tbodyHistEmp"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="js/empresario.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – AMAS</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="login-page">
+
+<div class="login-container">
+  <div class="login-left">
+    <div class="login-left-content">
+      <a href="index.html" class="nav-logo"><div class="logo-icon"><i class="fas fa-city"></i></div><span>AMAS</span></a>
+      <h2>Bem-vindo de volta!</h2>
+      <p>Acesse sua conta para gerenciar sua participação na associação e acompanhar seus benefícios.</p>
+      <div class="login-features">
+        <div class="lf-item"><i class="fas fa-shield-alt"></i><span>Acesso seguro e protegido</span></div>
+        <div class="lf-item"><i class="fas fa-chart-bar"></i><span>Painel personalizado por perfil</span></div>
+        <div class="lf-item"><i class="fas fa-bell"></i><span>Notificações em tempo real</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="login-right">
+    <div class="login-box">
+      <div class="login-header">
+        <button class="btn-theme" id="themeToggle" title="Alternar tema"><i class="fas fa-moon" id="themeIcon"></i></button>
+        <h3>Entrar no sistema</h3>
+        <p>Selecione seu perfil e faça login</p>
+      </div>
+
+      <div class="perfil-tabs">
+        <button class="tab-btn active" data-perfil="admin" onclick="setTab('admin',this)">
+          <i class="fas fa-user-shield"></i> Administrador
+        </button>
+        <button class="tab-btn" data-perfil="associado" onclick="setTab('associado',this)">
+          <i class="fas fa-user"></i> Associado
+        </button>
+        <button class="tab-btn" data-perfil="empresario" onclick="setTab('empresario',this)">
+          <i class="fas fa-store"></i> Empresário
+        </button>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div id="loginInfo" class="login-info"></div>
+
+        <div class="form-group" id="cpfGroup">
+          <label><i class="fas fa-id-card"></i> CPF</label>
+          <input type="text" id="inputCPF" placeholder="000.000.000-00" maxlength="14"/>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-lock"></i> Senha</label>
+          <div class="input-pass">
+            <input type="password" id="inputSenha" placeholder="Digite sua senha"/>
+            <button type="button" class="toggle-pass" onclick="togglePass()"><i class="fas fa-eye" id="eyeIcon"></i></button>
+          </div>
+        </div>
+
+        <div id="loginError" class="login-error hidden"></div>
+
+        <button type="submit" class="btn-primary btn-full"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+      </form>
+
+      <div class="login-hint">
+        <p><strong>Contas de demonstração:</strong></p>
+        <p>Admin: CPF <code>000.000.000-00</code> / Senha: <code>admin123</code></p>
+        <p>Associado: CPF <code>111.111.111-11</code> / Senha: <code>123456</code></p>
+        <p>Empresário: CPF <code>222.222.222-22</code> / Senha: <code>empresa123</code></p>
+      </div>
+
+      <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao site</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/login.js"></script>
+</body>
+</html>

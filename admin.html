@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Administrador – AMAS</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/admin.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-page">
+
+<div class="dashboard-layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="nav-logo"><div class="logo-icon"><i class="fas fa-city"></i></div><span>AMAS</span></div>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar"><i class="fas fa-user-shield"></i></div>
+      <div><strong id="sidebarName">Administrador</strong><span class="badge-role admin-role">Administrador</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="sn-item active" onclick="showSection('dashboard',this)"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="#" class="sn-item" onclick="showSection('associados',this)"><i class="fas fa-users"></i> Associados</a>
+      <a href="#" class="sn-item" onclick="showSection('cadastrar',this)"><i class="fas fa-user-plus"></i> Cadastrar</a>
+      <a href="#" class="sn-item" onclick="showSection('contribuicoes',this)"><i class="fas fa-money-bill-wave"></i> Contribuições</a>
+      <a href="#" class="sn-item" onclick="showSection('relatorios',this)"><i class="fas fa-chart-bar"></i> Relatórios</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-theme sn-item" id="themeToggle"><i class="fas fa-moon" id="themeIcon"></i> Tema</button>
+      <a href="login.html" class="sn-item logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="dashboard-main">
+    <header class="dash-header">
+      <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      <h2 id="pageTitle">Dashboard</h2>
+      <div class="dash-header-right">
+        <span id="dateTime" class="datetime"></span>
+        <a href="index.html" class="btn-outline-sm"><i class="fas fa-globe"></i> Site</a>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="dash-section active" id="sec-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card blue"><div class="sc-icon"><i class="fas fa-users"></i></div><div class="sc-info"><span>Total de Associados</span><strong id="statTotal">0</strong></div></div>
+        <div class="stat-card green"><div class="sc-icon"><i class="fas fa-check-circle"></i></div><div class="sc-info"><span>Regulares</span><strong id="statReg">0</strong></div></div>
+        <div class="stat-card red"><div class="sc-icon"><i class="fas fa-exclamation-circle"></i></div><div class="sc-info"><span>Inadimplentes</span><strong id="statInad">0</strong></div></div>
+        <div class="stat-card purple"><div class="sc-icon"><i class="fas fa-dollar-sign"></i></div><div class="sc-info"><span>Arrecadado no mês</span><strong id="statArrecadado">R$ 0,00</strong></div></div>
+      </div>
+      <div class="charts-row">
+        <div class="chart-card">
+          <h3>Situação dos Associados</h3>
+          <canvas id="chartPizza" height="250"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Arrecadação Mensal</h3>
+          <canvas id="chartBarras" height="250"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASSOCIADOS -->
+    <section class="dash-section" id="sec-associados">
+      <div class="section-toolbar">
+        <input type="text" id="buscaCPF" class="search-input" placeholder="Buscar por nome ou CPF..."/>
+        <button class="btn-primary" onclick="showSection('cadastrar')"><i class="fas fa-plus"></i> Novo</button>
+      </div>
+      <div class="table-wrapper">
+        <table class="dash-table" id="tabelaAssociados">
+          <thead><tr><th>Matrícula</th><th>Nome</th><th>CPF</th><th>Situação</th><th>Telefone</th><th>Ações</th></tr></thead>
+          <tbody id="tbodyAssociados"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CADASTRAR -->
+    <section class="dash-section" id="sec-cadastrar">
+      <div class="form-card">
+        <h3 id="formTitle"><i class="fas fa-user-plus"></i> Cadastrar Associado</h3>
+        <form id="formCadastro" class="form-associacao">
+          <input type="hidden" id="editId"/>
+          <div class="form-grid">
+            <div class="form-group"><label>Nome completo *</label><input type="text" id="cNome" required/></div>
+            <div class="form-group"><label>CPF *</label><input type="text" id="cCPF" maxlength="14" required/></div>
+            <div class="form-group"><label>Data de nascimento *</label><input type="date" id="cNasc" required/></div>
+            <div class="form-group"><label>Telefone *</label><input type="text" id="cTel" required/></div>
+            <div class="form-group"><label>Email *</label><input type="email" id="cEmail" required/></div>
+            <div class="form-group"><label>Profissão</label><input type="text" id="cProf"/></div>
+            <div class="form-group full"><label>Endereço *</label><input type="text" id="cEnd" required/></div>
+            <div class="form-group"><label>Data de entrada</label><input type="date" id="cEntrada"/></div>
+            <div class="form-group"><label>Status</label>
+              <select id="cStatus">
+                <option value="regular">Regular</option>
+                <option value="inadimplente">Inadimplente</option>
+                <option value="pendente">Pendente</option>
+                <option value="analise">Em análise</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Senha inicial *</label><input type="password" id="cSenha" required/></div>
+          </div>
+          <div id="cadError" class="login-error hidden"></div>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Salvar</button>
+            <button type="button" class="btn-outline" onclick="cancelEdit()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- CONTRIBUIÇÕES -->
+    <section class="dash-section" id="sec-contribuicoes">
+      <h3>Comprovantes aguardando análise</h3>
+      <div class="table-wrapper">
+        <table class="dash-table">
+          <thead><tr><th>Associado</th><th>Mês/Ano</th><th>Valor</th><th>Status</th><th>Arquivo</th><th>Ações</th></tr></thead>
+          <tbody id="tbodyContrib"></tbody>
+        </table>
+      </div>
+      <div id="modalRevisao" class="modal hidden">
+        <div class="modal-box">
+          <h4>Solicitar revisão</h4>
+          <textarea id="msgRevisao" rows="4" placeholder="Descreva o motivo da revisão..."></textarea>
+          <div class="modal-actions">
+            <button class="btn-primary" onclick="enviarRevisao()">Enviar</button>
+            <button class="btn-outline" onclick="fecharModal()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATÓRIOS -->
+    <section class="dash-section" id="sec-relatorios">
+      <div class="relatorio-cards">
+        <div class="rel-card"><i class="fas fa-users"></i><div><span>Total de Associados</span><strong id="rTotal">0</strong></div></div>
+        <div class="rel-card"><i class="fas fa-check-circle"></i><div><span>Regulares</span><strong id="rReg">0</strong></div></div>
+        <div class="rel-card"><i class="fas fa-times-circle"></i><div><span>Inadimplentes</span><strong id="rInad">0</strong></div></div>
+        <div class="rel-card"><i class="fas fa-clock"></i><div><span>Em análise</span><strong id="rAnal">0</strong></div></div>
+      </div>
+      <div class="chart-card full">
+        <h3>Distribuição de Status</h3>
+        <canvas id="chartRelatorio" height="200"></canvas>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
